@@ -17,7 +17,8 @@ class TenantTestCase(TransactionTestCase):
     def tearDownClass(cls):
         # delete tenant
         connection.set_schema_to_public()
-        cls.tenant.delete()
+        # cls.tenant.delete()
+        [tenant.delete() for tenant in get_tenant_model().objects.all()]
 
         cursor = connection.cursor()
         cursor.execute('DROP SCHEMA test CASCADE')
